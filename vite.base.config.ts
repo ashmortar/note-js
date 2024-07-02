@@ -1,5 +1,4 @@
 import { builtinModules } from "node:module";
-import path from "node:path";
 import type { AddressInfo } from "node:net";
 import type { ConfigEnv, Plugin, UserConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
