@@ -23,7 +23,7 @@ export function Notebook({ docUrl }: { docUrl: AutomergeUrl }) {
     }
   }, [handle]);
 
-  const [view, setView] = useState<EditorView | null>(null);
+  const [, setView] = useState<EditorView | null>(null);
   useEffect(() => {
     // We're not using this for anything yet, but this `AutoMirror` object is
     // where we will integrate prosemirror with automerge
