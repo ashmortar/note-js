@@ -64,5 +64,8 @@
     "react-router-dom": "6.24.0",
     "vite-plugin-top-level-await": "1.4.1",
     "vite-plugin-wasm": "3.3.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.9.5"
   }
 }
