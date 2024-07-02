@@ -4,6 +4,7 @@ export type Output = {
 };
 
 export type Cell = {
+  id: string;
   type: `md` | `ts` | `tsx`;
   execution_count: number;
   metadata: Record<string, unknown>;
@@ -12,8 +13,8 @@ export type Cell = {
 };
 
 export type Notebook = {
-  cells: Cell[];
-  metadata: Record<string, unknown>;
-  version: number;
   id: string;
+  version: number;
+  metadata: Record<string, unknown>;
+  cells: Cell[];
 };
