@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Nav } from "../components/nav";
+import { Nav } from "@/components/nav";
 
 /**
  * Primary application layout which renders into the <body> element of the page and

@@ -11,6 +11,7 @@ const config: ForgeConfig = {
   buildIdentifier: process.env.IS_BETA ? "beta" : "prod",
   packagerConfig: {
     asar: true,
+    executableName: "note-js",
   },
   rebuildConfig: {},
   makers: [
