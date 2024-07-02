@@ -6,5 +6,5 @@ NoteJS is a collaborative, local-first cell style notebook editor and runtime fo
 
 - [] Project scaffolding
 - [] Basic md cell editor / viewer
-- [] Basic ts cell functionality
-- [] Basic tsx cell functionality
+- [] Basic ts/js cell functionality
+- [] Basic tsx/jsx cell functionality
