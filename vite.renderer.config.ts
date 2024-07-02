@@ -10,7 +10,7 @@ export default defineConfig((env) => {
   const { root, mode, forgeConfigSelf } = forgeEnv;
   const name = forgeConfigSelf.name ?? "";
 
-  return {
+  const config: UserConfig = {
     root,
     mode,
     base: "./",
@@ -23,5 +23,12 @@ export default defineConfig((env) => {
       preserveSymlinks: true,
     },
     clearScreen: false,
-  } as UserConfig;
+    esbuild: {
+      supported: {
+        "top-level-await": true,
+      },
+    },
+  };
+
+  return config;
 });

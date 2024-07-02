@@ -32,6 +32,11 @@ export default defineConfig((env) => {
       // Load the Node.js entry.
       mainFields: ["module", "jsnext:main", "jsnext"],
     },
+    esbuild: {
+      supported: {
+        "top-level-await": true,
+      },
+    },
   };
 
   return mergeConfig(getBuildConfig(forgeEnv), config);

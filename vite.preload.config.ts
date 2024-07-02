@@ -26,6 +26,11 @@ export default defineConfig((env) => {
       },
     },
     plugins: [wasm(), topLevelAwait(), pluginHotRestart("reload")],
+    esbuild: {
+      supported: {
+        "top-level-await": true,
+      },
+    },
   };
 
   return mergeConfig(getBuildConfig(forgeEnv), config);
