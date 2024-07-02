@@ -22,18 +22,12 @@ export function getBuildConfig(env: ConfigEnv<"build">): UserConfig {
     root,
     mode,
     build: {
-      target: "esnext",
       // Prevent multiple builds from interfering with each other.
       emptyOutDir: false,
       // 🚧 Multiple builds may conflict.
       outDir: ".vite/build",
       watch: command === "serve" ? {} : null,
       minify: command === "build",
-    },
-    esbuild: {
-      supported: {
-        "top-level-await": true,
-      },
     },
     clearScreen: false,
   };

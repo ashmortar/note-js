@@ -1,8 +1,6 @@
 import type { ConfigEnv, UserConfig } from "vite";
 import { defineConfig, mergeConfig } from "vite";
 import { getBuildConfig, external, pluginHotRestart } from "./vite.base.config";
-import wasm from "vite-plugin-wasm";
-import topLevelAwait from "vite-plugin-top-level-await";
 
 // https://vitejs.dev/config
 export default defineConfig((env) => {
@@ -10,7 +8,6 @@ export default defineConfig((env) => {
   const { forgeConfigSelf } = forgeEnv;
   const config: UserConfig = {
     build: {
-      target: "esnext",
       rollupOptions: {
         external,
         // Preload scripts may contain Web assets, so use the `build.rollupOptions.input` instead `build.lib.entry`.
@@ -25,12 +22,7 @@ export default defineConfig((env) => {
         },
       },
     },
-    plugins: [wasm(), topLevelAwait(), pluginHotRestart("reload")],
-    esbuild: {
-      supported: {
-        "top-level-await": true,
-      },
-    },
+    plugins: [pluginHotRestart("reload")],
   };
 
   return mergeConfig(getBuildConfig(forgeEnv), config);

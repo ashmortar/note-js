@@ -1,8 +1,6 @@
 import type { ConfigEnv, UserConfig } from "vite";
 import { defineConfig } from "vite";
 import { pluginExposeRenderer } from "./vite.base.config";
-import topLevelAwait from "vite-plugin-top-level-await";
-import wasm from "vite-plugin-wasm";
 
 // https://vitejs.dev/config
 export default defineConfig((env) => {
@@ -15,19 +13,13 @@ export default defineConfig((env) => {
     mode,
     base: "./",
     build: {
-      target: "esnext",
       outDir: `.vite/renderer/${name}`,
     },
-    plugins: [wasm(), topLevelAwait(), pluginExposeRenderer(name)],
+    plugins: [pluginExposeRenderer(name)],
     resolve: {
       preserveSymlinks: true,
     },
     clearScreen: false,
-    esbuild: {
-      supported: {
-        "top-level-await": true,
-      },
-    },
   };
 
   return config;

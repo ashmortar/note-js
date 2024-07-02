@@ -6,8 +6,6 @@ import {
   external,
   pluginHotRestart,
 } from "./vite.base.config";
-import topLevelAwait from "vite-plugin-top-level-await";
-import wasm from "vite-plugin-wasm";
 
 // https://vitejs.dev/config
 export default defineConfig((env) => {
@@ -16,7 +14,6 @@ export default defineConfig((env) => {
   const define = getBuildDefine(forgeEnv);
   const config: UserConfig = {
     build: {
-      target: "esnext",
       lib: {
         entry: forgeConfigSelf.entry!,
         fileName: () => "[name].js",
@@ -26,16 +23,11 @@ export default defineConfig((env) => {
         external,
       },
     },
-    plugins: [wasm(), topLevelAwait(), pluginHotRestart("restart")],
+    plugins: [pluginHotRestart("restart")],
     define,
     resolve: {
       // Load the Node.js entry.
       mainFields: ["module", "jsnext:main", "jsnext"],
-    },
-    esbuild: {
-      supported: {
-        "top-level-await": true,
-      },
     },
   };
 
