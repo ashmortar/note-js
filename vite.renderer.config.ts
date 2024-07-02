@@ -15,6 +15,7 @@ export default defineConfig((env) => {
     mode,
     base: "./",
     build: {
+      target: "esnext",
       outDir: `.vite/renderer/${name}`,
     },
     plugins: [wasm(), topLevelAwait(), pluginExposeRenderer(name)],
