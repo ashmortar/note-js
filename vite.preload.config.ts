@@ -2,6 +2,7 @@ import type { ConfigEnv, UserConfig } from "vite";
 import { defineConfig, mergeConfig } from "vite";
 import { getBuildConfig, external, pluginHotRestart } from "./vite.base.config";
 import wasm from "vite-plugin-wasm";
+import topLevelAwait from "vite-plugin-top-level-await";
 
 // https://vitejs.dev/config
 export default defineConfig((env) => {
@@ -28,6 +29,3 @@ export default defineConfig((env) => {
 
   return mergeConfig(getBuildConfig(forgeEnv), config);
 });
-function topLevelAwait(): import("vite").PluginOption {
-  throw new Error("Function not implemented.");
-}

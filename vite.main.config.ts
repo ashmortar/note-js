@@ -16,6 +16,7 @@ export default defineConfig((env) => {
   const define = getBuildDefine(forgeEnv);
   const config: UserConfig = {
     build: {
+      target: "esnext",
       lib: {
         entry: forgeConfigSelf.entry!,
         fileName: () => "[name].js",
