@@ -43,23 +43,23 @@ jobs:
         run: echo "Cache Hit, skipping steps..."
 
       - name: Lint
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true' && github.event_name != 'push'
         run: npm run lint:fix
 
       - name: Test
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true' && github.event_name != 'push'
         run: npm run test
 
       - name: Pacakge
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true' && github.event_name != 'push'
         run: npm run package
 
       - name: Make
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true' && github.event_name != 'push'
         run: npm run make
 
       - name: Upload Artifact
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true' && github.event_name != 'push'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os }}-${{ hashFiles('**/package-lock.json','**/yarn.lock','src/**/*.ts','src/**/*.tsx','src/assets/**/*','./*.html','./*.ts','./*.js','./*.json','./*.md','.github/workflows') }}
@@ -67,5 +67,5 @@ jobs:
           overwrite: true
 
       - name: Publish
-        if: steps.cache.outputs.cache-hit != 'true' && github.event_name == 'push'
+        if: github.event_name == 'push'
         run: npm run publish
