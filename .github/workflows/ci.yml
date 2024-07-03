@@ -46,6 +46,7 @@ jobs:
             ./*.js
             ./*.json
             ./*.md
+            .github/workflows/ci.yml
 
       - uses: actions/cache@v4
         id: cache
