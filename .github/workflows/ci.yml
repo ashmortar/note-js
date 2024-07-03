@@ -73,6 +73,14 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm run make
 
+      - name: Upload Artifact
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}-${{ steps.get-hash.outputs.hash }}
+          path: out
+          overwrite: true
+
       - name: Publish
         if: steps.cache.outputs.cache-hit != 'true' && github.event_name == 'push'
         run: npm run publish
