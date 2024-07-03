@@ -50,22 +50,21 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm run test
 
-      - name: Pacakge
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm run package
-
       - name: Make
-        if: steps.cache.outputs.cache-hit != 'true'
+        # if not a push and cache miss then make again
+        if: github.event_name != 'push' && steps.cache.outputs.cache-hit != 'true'
         run: npm run make
 
+      - name: Publish
+        # always publish on push
+        if: github.event_name == 'push'
+        run: npm run publish
+
       - name: Upload Artifact
+        # build artifacts haven't been produced before, upload them for qa
         if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ runner.os }}-${{ hashFiles('**/package-lock.json','**/yarn.lock','src/**/*.ts','src/**/*.tsx','src/assets/**/*','./*.html','./*.ts','./*.js','./*.json','./*.md','.github/workflows') }}
           path: out
           overwrite: true
-
-      - name: Publish
-        if: github.event_name == 'push'
-        run: npm run publish
