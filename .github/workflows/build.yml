@@ -41,6 +41,7 @@ jobs:
       - name: Make
         run: npm run make
       - name: create artifact name
-        run: echo "version=${{ matrix.os }}-$(npm pkg get version)" >> $GITHUB_ENV
+        #  USE THE GITHUB_SHA ENVIRONMENT VARIABLE TO CREATE A UNIQUE ARTIFACT NAME PER TARGET
+        run: echo "version=${{ matrix.os }}-${{ env.GITHUB_SHA }}" >> $GITHUB_ENV
       - name: use artifact name
         run: echo "Artifact name is $version"
