@@ -32,27 +32,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - uses: seepine/hash-files@v1
-        id: get-hash
-        with:
-          patterns: |
-            **/package-lock.json
-            **/yarn.lock
-            src/**/*.ts
-            src/**/*.tsx
-            src/assets/**/*
-            ./*.html
-            ./*.ts
-            ./*.js
-            ./*.json
-            ./*.md
-            .github/workflows/ci.yml
-
       - uses: actions/cache@v4
         id: cache
         with:
           path: out
-          key: ${{ runner.os }}-${{ steps.get-hash.outputs.hash }}
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json','**/yarn.lock','src/**/*.ts','src/**/*.tsx','src/assets/**/*','./*.html','./*.ts','./*.js','./*.json','./*.md','.github/workflows') }}
 
       - name: Cache Hit
         if: steps.cache.outputs.cache-hit == 'true'
@@ -78,7 +62,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.os }}-${{ steps.get-hash.outputs.hash }}
+          name: ${{ matrix.os }}-${{ hashFiles('**/package-lock.json','**/yarn.lock','src/**/*.ts','src/**/*.tsx','src/assets/**/*','./*.html','./*.ts','./*.js','./*.json','./*.md','.github/workflows') }}
           path: out
           overwrite: true
 
