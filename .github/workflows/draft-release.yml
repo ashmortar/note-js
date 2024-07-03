@@ -1,7 +1,7 @@
-name: Setup, Test and Build Artifacts
+name: Publish Draft Release
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
@@ -40,3 +40,6 @@ jobs:
 
       - name: Make
         run: npm run make
+
+      - name: Publish
+        run: npm run publish
