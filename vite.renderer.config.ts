@@ -1,8 +1,8 @@
 import type { ConfigEnv, UserConfig } from "vite";
 import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
+
 import { pluginExposeRenderer } from "./vite.base.config";
-import topLevelAwait from "vite-plugin-top-level-await";
-import wasm from "vite-plugin-wasm";
 
 // https://vitejs.dev/config
 export default defineConfig((env) => {
@@ -10,17 +10,19 @@ export default defineConfig((env) => {
   const { root, mode, forgeConfigSelf } = forgeEnv;
   const name = forgeConfigSelf.name ?? "";
 
-  return {
+  const config: UserConfig = {
     root,
     mode,
     base: "./",
     build: {
       outDir: `.vite/renderer/${name}`,
     },
-    plugins: [wasm(), topLevelAwait(), pluginExposeRenderer(name)],
+    plugins: [tsconfigPaths(), pluginExposeRenderer(name)],
     resolve: {
       preserveSymlinks: true,
     },
     clearScreen: false,
-  } as UserConfig;
+  };
+
+  return config;
 });
