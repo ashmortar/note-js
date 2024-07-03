@@ -42,6 +42,19 @@ jobs:
         run: npm run make
       - name: create artifact name
         #  USE THE GITHUB_SHA ENVIRONMENT VARIABLE TO CREATE A UNIQUE ARTIFACT NAME PER TARGET
-        run: echo "version=${{ matrix.os }}-${{ env.GITHUB_SHA }}" >> $GITHUB_ENV
+        run: echo "version=${{ matrix.os }}-${GITHUB_SHA}" >> $GITHUB_ENV
       - name: use artifact name
         run: echo "Artifact name is $version"
+
+      - uses: seepine/hash-files@v1
+        id: get-hash
+        with:
+          patterns: |
+            **/package-lock.json
+            **/yarn.lock
+            src/**/*.ts
+            src/**/*.tsx
+            **/*.html
+
+      - name: Echo hash
+        run: echo ${{ steps.get-hash.outputs.hash }}
