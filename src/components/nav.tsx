@@ -1,20 +1,23 @@
-import { Link } from "react-router-dom";
+import * as NavigationMenu from "@radix-ui/react-navigation-menu";
+import { NavLink } from "./ui/nav-link";
 
 export function Nav() {
   return (
-    <nav>
-      <div className="nav-title">
+    <>
+      <div className="flex flex-row">
         <img width={50} height={50} src="/src/assets/temp.webp" alt="temp" />
         <p>NoteJS</p>
       </div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/notebook">Notebook</Link>
-        </li>
-      </ul>
-    </nav>
+      <NavigationMenu.Root>
+        <NavigationMenu.List>
+          <NavigationMenu.Item>
+            <NavLink to="/">Home</NavLink>
+          </NavigationMenu.Item>
+          <NavigationMenu.Item>
+            <NavLink to="/notebook">Notebook</NavLink>
+          </NavigationMenu.Item>
+        </NavigationMenu.List>
+      </NavigationMenu.Root>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 export function Notebook() {
   return (
-    <>
+    <main>
       <header>
         <h1>Notebook</h1>
         <button>save</button>
@@ -8,6 +8,6 @@ export function Notebook() {
         <button>{"<- home"}</button>
       </header>
       <div id="editor"></div>
-    </>
+    </main>
   );
 }
