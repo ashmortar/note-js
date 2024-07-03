@@ -36,7 +36,7 @@ jobs:
         id: cache
         with:
           path: out
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json','**/yarn.lock','src/**/*.ts','src/**/*.tsx','src/assets/**/*','./*.html','./*.ts','./*.js','./*.json','./*.md','.github/workflows') }}
+          key: ${{ matrix.os }}-${{ hashFiles('**/package-lock.json','**/yarn.lock','src/**/*.ts','src/**/*.tsx','src/assets/**/*','./*.html','./*.ts','./*.js','./*.json','./*.md','.github/workflows') }}
 
       - name: Cache Hit
         if: steps.cache.outputs.cache-hit == 'true'
@@ -65,6 +65,6 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ runner.os }}-${{ hashFiles('**/package-lock.json','**/yarn.lock','src/**/*.ts','src/**/*.tsx','src/assets/**/*','./*.html','./*.ts','./*.js','./*.json','./*.md','.github/workflows') }}
+          name: ${{ matrix.os }}-${{ hashFiles('**/package-lock.json','**/yarn.lock','src/**/*.ts','src/**/*.tsx','src/assets/**/*','./*.html','./*.ts','./*.js','./*.json','./*.md','.github/workflows') }}
           path: out
           overwrite: true
