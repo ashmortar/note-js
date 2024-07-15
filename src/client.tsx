@@ -13,7 +13,7 @@ const router = createHashRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/home",
+        path: "/",
         element: <Home />,
       },
       {
@@ -24,7 +24,13 @@ const router = createHashRouter([
   },
 ]);
 
-createRoot(document.body).render(
+const root = document.getElementById("root");
+
+if (!root) {
+  throw new Error("No root element found");
+}
+
+createRoot(root).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>
