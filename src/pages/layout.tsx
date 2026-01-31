@@ -1,5 +1,10 @@
 import { Outlet } from "react-router-dom";
 import { Nav } from "@/components/nav";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
 
 /**
  * Primary application layout which renders into the <body> element of the page and
@@ -9,11 +14,14 @@ import { Nav } from "@/components/nav";
  */
 export function Layout() {
   return (
-    <>
-      <Nav />
-      <main>
+    <ResizablePanelGroup direction="horizontal">
+      <ResizablePanel minSize={5} defaultSize={18} maxSize={35}>
+        <Nav />
+      </ResizablePanel>
+      <ResizableHandle />
+      <ResizablePanel>
         <Outlet />
-      </main>
-    </>
+      </ResizablePanel>
+    </ResizablePanelGroup>
   );
 }
